@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pa", "pa\pa.csproj", "{0D683B43-72D2-4862-AEDF-863104B5837E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pb", "pb\pb.csproj", "{6E60088A-497B-485F-B97A-481186FEABC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D683B43-72D2-4862-AEDF-863104B5837E}.Debug|x86.ActiveCfg = Debug|x86
+		{0D683B43-72D2-4862-AEDF-863104B5837E}.Debug|x86.Build.0 = Debug|x86
+		{0D683B43-72D2-4862-AEDF-863104B5837E}.Release|x86.ActiveCfg = Release|x86
+		{0D683B43-72D2-4862-AEDF-863104B5837E}.Release|x86.Build.0 = Release|x86
+		{6E60088A-497B-485F-B97A-481186FEABC5}.Debug|x86.ActiveCfg = Debug|x86
+		{6E60088A-497B-485F-B97A-481186FEABC5}.Debug|x86.Build.0 = Debug|x86
+		{6E60088A-497B-485F-B97A-481186FEABC5}.Release|x86.ActiveCfg = Release|x86
+		{6E60088A-497B-485F-B97A-481186FEABC5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
