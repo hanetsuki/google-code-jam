@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,8 @@ namespace pb
     class Env
     {
         static public string[] delim = { " ", "\t" };
-        public StreamReader sr;
-        public StreamWriter sw;
+        public StreamReader srd;
+        public StreamWriter swr;
     }
     class Program
     {
@@ -24,7 +25,7 @@ namespace pb
 
         static void probCore(long T, Env env)
         {
-            string line = env.sr.ReadLine();
+            string line = env.srd.ReadLine();
             string[] parts = line.Split(Env.delim, StringSplitOptions.None);
             int K = Int32.Parse(parts[0]);
             string S = parts[1];
@@ -53,16 +54,16 @@ namespace pb
             if (list.Count > 0)
             {
                 list.Sort(hikaku);
-                env.sw.Write("Case #{0}:", T);
+                env.swr.Write("Case #{0}:", T);
                 for (int i = 0; i < list.Count; i++)
                 {
-                    env.sw.Write(" {0}", list[i].Key);
+                    env.swr.Write(" {0}", list[i].Key);
                 }
-                env.sw.WriteLine();
+                env.swr.WriteLine();
             }
             else
             {
-                env.sw.WriteLine("Case #{0}: NONE", T);
+                env.swr.WriteLine("Case #{0}: NONE", T);
             }
 
 
@@ -73,26 +74,32 @@ namespace pb
 
         static void probLoop(Env env)
         {
-            string line = env.sr.ReadLine();
+            string line = env.srd.ReadLine();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             long t = Int64.Parse(line);
             for (long i = 1; i <= t; i++)
             {
                 //Console.WriteLine("case{0}", i);
                 probCore(i, env);
             }
+            sw.Stop();
+            long millisec = sw.ElapsedMilliseconds;
+            Console.WriteLine("used:{0}[ms]", millisec);
+            //used:193[ms]
         }
 
         static void Main(string[] args)
         {
-            StreamReader sr = null;
-            StreamWriter sw = null;
+            StreamReader srd = null;
+            StreamWriter swr = null;
             Env env = new Env();
 
             try
             {
-                sr = new StreamReader(
+                srd = new StreamReader(
                     args[0], Encoding.GetEncoding("Shift_JIS"));
-                env.sr = sr;
+                env.srd = srd;
             }
             catch (Exception e)
             {
@@ -101,18 +108,17 @@ namespace pb
 
             try
             {
-                sw = new StreamWriter(
+                swr = new StreamWriter(
                     args[1], false, Encoding.GetEncoding("Shift_JIS"));
-                env.sw = sw;
+                env.swr = swr;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
             probLoop(env);
 
-            sw.Close();
+            swr.Close();
         }
     }
 }
