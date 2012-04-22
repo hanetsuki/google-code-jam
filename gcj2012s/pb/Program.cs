@@ -31,40 +31,32 @@ namespace pb
             string S = parts[1];
             int N = S.Length;
 
-            Dictionary<string, int> dict = new Dictionary<string, int>();
+            List<uint> list = new List<uint>();
             for (int i = 0; i <= (N - K); i++)
             {
-                string key = S.Substring(i, K);
-                if (!dict.ContainsKey(key)) {
-                    dict[key] = 1;
-                }
-                else
+                string substr = S.Substring(i, K);
+                uint k = UInt32.Parse(substr);
+                list.Add(k);
+            }
+            list.Sort();
+            bool flag = false;
+            uint lastPrint = 0;
+            env.swr.Write("Case #{0}:", T);
+            for (int i = 1; i < (list.Count); i++)
+            {
+                if ((lastPrint != list[i])
+                    && (list[i - 1] == list[i]))
                 {
-                    dict[key]++;
+                    flag = true;
+                    lastPrint = list[i];
+                    env.swr.Write(" {0}", lastPrint);
                 }
             }
-            Dictionary<string, int> dict2 = new Dictionary<string, int>(dict);
-            foreach (KeyValuePair<string, int> pair in dict2)
+            if (!flag)
             {
-                if (pair.Value <= 1) {
-                    dict.Remove(pair.Key);
-                }
+                env.swr.Write(" NONE", T);
             }
-            List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>(dict);
-            if (list.Count > 0)
-            {
-                list.Sort(hikaku);
-                env.swr.Write("Case #{0}:", T);
-                for (int i = 0; i < list.Count; i++)
-                {
-                    env.swr.Write(" {0}", list[i].Key);
-                }
-                env.swr.WriteLine();
-            }
-            else
-            {
-                env.swr.WriteLine("Case #{0}: NONE", T);
-            }
+            env.swr.WriteLine();
         }
 
         static void probLoop(Env env)
@@ -80,7 +72,8 @@ namespace pb
             sw.Stop();
             long millisec = sw.ElapsedMilliseconds;
             Console.WriteLine("used:{0}[ms]", millisec);
-            //used:72[ms]
+            //used:61[ms]
+            //stringのときはused:340[ms]くらい
         }
 
         static void Main(string[] args)
