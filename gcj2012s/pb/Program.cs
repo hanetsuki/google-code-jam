@@ -65,11 +65,6 @@ namespace pb
             {
                 env.swr.WriteLine("Case #{0}: NONE", T);
             }
-
-
-
-            //env.sw.WriteLine("Case #{0}: {1}", t, ans);
-            ////Console.WriteLine("ans:{0}", ans);
         }
 
         static void probLoop(Env env)
@@ -80,13 +75,12 @@ namespace pb
             long t = Int64.Parse(line);
             for (long i = 1; i <= t; i++)
             {
-                //Console.WriteLine("case{0}", i);
                 probCore(i, env);
             }
             sw.Stop();
             long millisec = sw.ElapsedMilliseconds;
             Console.WriteLine("used:{0}[ms]", millisec);
-            //used:193[ms]
+            //used:72[ms]
         }
 
         static void Main(string[] args)
