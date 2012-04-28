@@ -16,25 +16,24 @@ namespace r1a_pb
             public StreamReader srd;
             public StreamWriter swr;
         }
-        struct level
+        struct level : IComparable
         {
             public int a;
             public int b;
             public int c;
+            public int CompareTo( object obj )
+            {
+                return -(b - ((level)obj).b);
+            }
         }
         static void probCore(long T, Env env)
         {
             string line = env.srd.ReadLine();
             int N = Int32.Parse(line);
             level[] l = new level[N];
-
-
-
         //    string[] parts = line.Split(Env.delim, StringSplitOptions.None);
             //    int A = Int32.Parse(parts[0]);
             //    int B = Int32.Parse(parts[1]);
-
-
             for (int i = 0; i < N; i++)
             {
                 line = env.srd.ReadLine();
@@ -43,6 +42,8 @@ namespace r1a_pb
                 l[i].b = Int32.Parse(parts[1]);
                 l[i].c = 0;
             }
+
+            Array.Sort(l);
 
             int s = 0;
             int a = 0;

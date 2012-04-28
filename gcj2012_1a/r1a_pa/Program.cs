@@ -33,21 +33,22 @@ namespace pa
             line = env.srd.ReadLine();
             parts = line.Split(Env.delim, StringSplitOptions.None);
 
-            double[] p = new double[A];
             double[] q = new double[A];
             for (int i = 0; i < A; i++)
             {
-                p[i] = Double.Parse(parts[i]);
-                if (i == 0)
+                double[] p = new double[A];
                 {
-                    q[i] = p[0];
-                }
-                else
-                {
-                    q[i] = q[i - 1] * p[i];
+                    p[i] = Double.Parse(parts[i]);
+                    if (i == 0)
+                    {
+                        q[i] = p[0];
+                    }
+                    else
+                    {
+                        q[i] = q[i - 1] * p[i];
+                    }
                 }
             }
-
             //戦略
             //スルーするX
             //  success (B-A)+1

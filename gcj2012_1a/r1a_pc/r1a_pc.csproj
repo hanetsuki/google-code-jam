@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>c95eeae0-49e0-4b68-8693-71b2268e0f32</ProjectGuid>
+    <ProjectGuid>{3BF9CB5F-EADE-4DFC-86AA-8FE7A38C12F3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>r1a_pc</RootNamespace>
