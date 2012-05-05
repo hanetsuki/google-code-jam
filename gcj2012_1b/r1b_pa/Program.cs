@@ -18,20 +18,48 @@ namespace pa
     {
         static void probCore(long T, Env env)
         {
-//              string line = env.srd.ReadLine();
-//              string[] parts = line.Split(Env.delim, StringSplitOptions.None);
-//              int A = Int32.Parse(parts[0]);
-//              int B = Int32.Parse(parts[1]);
-//
-//              line = env.srd.ReadLine();
-//              parts = line.Split(Env.delim, StringSplitOptions.None);
-//
-//              double[] q = new double[A];
-//              for (int i = 0; i < A; i++)
-//              {
+            string line = env.srd.ReadLine();
+            string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+            int N = Int32.Parse(parts[0]);
+            int[] s = new int[N];
+            int sum = 0;
+            for (int i = 0; i < N; i++)
+            {
+                s[i] = Int32.Parse(parts[i+1]);
+                sum = sum + s[i];
+            }
+            double 審査員持ち点 = (sum * 1.0);
+            double 合格に必要な点 = (sum * 2.0) / N;
+
+            env.swr.Write("Case #{0}:", T);
+
+            double 審査員から貰うべき得票率の合計 = 0;
+            for (int i = 0; i < N; i++)
+            {
+                double 審査員から貰うべき点 = 合格に必要な点 - s[i];
+                if (審査員から貰うべき点 < 0) {
+                    Console.WriteLine("T{0} 例外発生 i{1}, {2},{3},si{4}",
+                        T,
+                        i,
+                        審査員から貰うべき点,
+                        合格に必要な点,
+                        s[i]
+                    );
+                    審査員持ち点 = 審査員持ち点 - 審査員から貰うべき点;
+                    審査員から貰うべき点 = 0;
+                }
+                double 審査員から貰うべき得票率 = 審査員から貰うべき点 / 審査員持ち点;
+                審査員から貰うべき得票率の合計 = 審査員から貰うべき得票率の合計 + 審査員から貰うべき得票率;
+                env.swr.Write(" {0}", 審査員から貰うべき得票率 * 100.0);
+            }
+            env.swr.WriteLine();
+            Console.WriteLine("T{0} {1}",
+                T,
+                審査員から貰うべき得票率の合計
+            );
+
 //                  double[] p = new double[A];
 //                  {
-//                      p[i] = Double.Parse(parts[i]);
 //                      if (i == 0)
 //                      {
 //                          q[i] = p[0];
@@ -89,7 +117,6 @@ namespace pa
 //          //    list.Sort();
 //          //    bool flag = false;
 //          //    uint lastPrint = 0;
-//              env.swr.WriteLine("Case #{0}: {1}", T, xyzExp);
 //          //    for (int i = 1; i < (list.Count); i++)
 //          //    {
 //          //        if ((lastPrint != list[i])
