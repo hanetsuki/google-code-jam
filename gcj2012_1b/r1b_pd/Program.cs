@@ -16,47 +16,47 @@ namespace pd
     }
     class Program
     {
-        static int hikaku(
-          KeyValuePair<string, int> kvp1,
-          KeyValuePair<string, int> kvp2)
-        {
-            return kvp1.Key.CompareTo(kvp2.Key);
-        }
+//        static int hikaku(
+//          KeyValuePair<string, int> kvp1,
+//          KeyValuePair<string, int> kvp2)
+//        {
+//            return kvp1.Key.CompareTo(kvp2.Key);
+//        }
 
         static void probCore(long T, Env env)
         {
-            string line = env.srd.ReadLine();
-            string[] parts = line.Split(Env.delim, StringSplitOptions.None);
-            int K = Int32.Parse(parts[0]);
-            string S = parts[1];
-            int N = S.Length;
-
-            List<uint> list = new List<uint>();
-            for (int i = 0; i <= (N - K); i++)
-            {
-                string substr = S.Substring(i, K);
-                uint k = UInt32.Parse(substr);
-                list.Add(k);
-            }
-            list.Sort();
-            bool flag = false;
-            uint lastPrint = 0;
-            env.swr.Write("Case #{0}:", T);
-            for (int i = 1; i < (list.Count); i++)
-            {
-                if ((lastPrint != list[i])
-                    && (list[i - 1] == list[i]))
-                {
-                    flag = true;
-                    lastPrint = list[i];
-                    env.swr.Write(" {0}", lastPrint);
-                }
-            }
-            if (!flag)
-            {
-                env.swr.Write(" NONE", T);
-            }
-            env.swr.WriteLine();
+//            string line = env.srd.ReadLine();
+//            string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+//            int K = Int32.Parse(parts[0]);
+//            string S = parts[1];
+//            int N = S.Length;
+//
+//            List<uint> list = new List<uint>();
+//            for (int i = 0; i <= (N - K); i++)
+//            {
+//                string substr = S.Substring(i, K);
+//                uint k = UInt32.Parse(substr);
+//                list.Add(k);
+//            }
+//            list.Sort();
+//            bool flag = false;
+//            uint lastPrint = 0;
+//            env.swr.Write("Case #{0}:", T);
+//            for (int i = 1; i < (list.Count); i++)
+//            {
+//                if ((lastPrint != list[i])
+//                    && (list[i - 1] == list[i]))
+//                {
+//                    flag = true;
+//                    lastPrint = list[i];
+//                    env.swr.Write(" {0}", lastPrint);
+//                }
+//            }
+//            if (!flag)
+//            {
+//                env.swr.Write(" NONE", T);
+//            }
+//            env.swr.WriteLine();
         }
 
         static void probLoop(Env env)

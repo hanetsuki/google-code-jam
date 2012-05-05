@@ -16,102 +16,78 @@ namespace r1a_pb
             public StreamReader srd;
             public StreamWriter swr;
         }
-        struct level : IComparable
-        {
-            public int a;
-            public int b;
-            public int c;
-            public int CompareTo( object obj )
-            {
-                return -(b - ((level)obj).b);
-            }
-        }
+        //struct level : IComparable
+        //{
+        //    public int a;
+        //    public int b;
+        //    public int c;
+        //    public int CompareTo( object obj )
+        //    {
+        //        return -(b - ((level)obj).b);
+        //    }
+        //}
         static void probCore(long T, Env env)
         {
-            string line = env.srd.ReadLine();
-            int N = Int32.Parse(line);
-            level[] l = new level[N];
-        //    string[] parts = line.Split(Env.delim, StringSplitOptions.None);
-            //    int A = Int32.Parse(parts[0]);
-            //    int B = Int32.Parse(parts[1]);
-            for (int i = 0; i < N; i++)
-            {
-                line = env.srd.ReadLine();
-                string[] parts = line.Split(Env.delim, StringSplitOptions.None);
-                l[i].a = Int32.Parse(parts[0]);
-                l[i].b = Int32.Parse(parts[1]);
-                l[i].c = 0;
-            }
-
-            Array.Sort(l);
-
-            int s = 0;
-            int a = 0;
-            while (true)
-            {
-                bool flag = false;
-                for (int i = 0; i < N; i++)
-                {
-                    if ((l[i].c < 2) && l[i].b <= s)
-                    {
-                        a++;
-                        s = s + 2 - l[i].c;
-                        l[i].c = 2;
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag)
-                {
-                    continue;
-                }
-                for (int i = 0; i < N; i++)
-                {
-                    if ((l[i].c < 1) && l[i].a <= s)
-                    {
-                        a++;
-                        s = s + 1 - l[i].c;
-                        l[i].c = 1;
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag)
-                {
-                    continue;
-                }
-                if (s >= 2 * N)
-                {
-                    env.swr.WriteLine("Case #{0}: {1}", T, a);
-                    return;
-                }
-                else if (!flag)
-                {
-                    env.swr.WriteLine("Case #{0}: Too Bad", T);
-                    return;
-                }
-            }
-
-
-
-
-
-            //    env.swr.WriteLine("Case #{0}: {1}", T, xyzExp);
-            //    //    for (int i = 1; i < (list.Count); i++)
-        //    //    {
-        //    //        if ((lastPrint != list[i])
-        //    //            && (list[i - 1] == list[i]))
-        //    //        {
-        //    //            flag = true;
-        //    //            lastPrint = list[i];
-        //    //            env.swr.Write(" {0}", lastPrint);
-        //    //        }
-        //    //    }
-        //    //    if (!flag)
-        //    //    {
-        //    //        env.swr.Write(" NONE", T);
-        //    //    }
-        //    //env.swr.WriteLine();
+        //    string line = env.srd.ReadLine();
+        //    int N = Int32.Parse(line);
+        //    level[] l = new level[N];
+        //    for (int i = 0; i < N; i++)
+        //    {
+        //        line = env.srd.ReadLine();
+        //        string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+        //        l[i].a = Int32.Parse(parts[0]);
+        //        l[i].b = Int32.Parse(parts[1]);
+        //        l[i].c = 0;
+        //    }
+        //
+        //    Array.Sort(l);
+        //
+        //    int s = 0;
+        //    int a = 0;
+        //    while (true)
+        //    {
+        //        bool flag = false;
+        //        for (int i = 0; i < N; i++)
+        //        {
+        //            if ((l[i].c < 2) && l[i].b <= s)
+        //            {
+        //                a++;
+        //                s = s + 2 - l[i].c;
+        //                l[i].c = 2;
+        //                flag = true;
+        //                break;
+        //            }
+        //        }
+        //        if (flag)
+        //        {
+        //            continue;
+        //        }
+        //        for (int i = 0; i < N; i++)
+        //        {
+        //            if ((l[i].c < 1) && l[i].a <= s)
+        //            {
+        //                a++;
+        //                s = s + 1 - l[i].c;
+        //                l[i].c = 1;
+        //                flag = true;
+        //                break;
+        //            }
+        //        }
+        //        if (flag)
+        //        {
+        //            continue;
+        //        }
+        //        if (s >= 2 * N)
+        //        {
+        //            env.swr.WriteLine("Case #{0}: {1}", T, a);
+        //            return;
+        //        }
+        //        else if (!flag)
+        //        {
+        //            env.swr.WriteLine("Case #{0}: Too Bad", T);
+        //            return;
+        //        }
+        //    }
         }
 
         static void probLoop(Env env)
