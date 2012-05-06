@@ -29,10 +29,9 @@ namespace pa
                 sum = sum + s[i];
             }
             double 審査員持ち点 = (sum * 1.0);
-            double 合格に必要な点 = (sum * 2.0) / N;
+            double 合格に必要な点 = Math.Ceiling((sum * 2.0) / N);
 
 
-            double 審査員から貰うべき得票率の合計 = 0;
             double[] 審査員から貰うべき点 = new double[N];
             for (int i = 0; i < N; i++)
             {
@@ -51,6 +50,7 @@ namespace pa
             }
 
             env.swr.Write("Case #{0}:", T);
+            double 審査員から貰うべき得票率の合計 = 0;
             for (int i = 0; i < N; i++)
             {
                 double 審査員から貰うべき得票率 = 審査員から貰うべき点[i] / 審査員持ち点;
