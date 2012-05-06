@@ -18,6 +18,7 @@ namespace pa
     {
         static void probCore(long T, Env env)
         {
+            Console.WriteLine("start#{0}", T);
             string line = env.srd.ReadLine();
             string[] parts = line.Split(Env.delim, StringSplitOptions.None);
             int N = Int32.Parse(parts[0]);
@@ -30,35 +31,50 @@ namespace pa
             }
             int 審査員持ち点 = (sum * 1);
             //double 合格に必要な点 = Math.Ceiling((sum * 2.0) / N);
-            int 合格に必要な点 = 1;
+            double 合格に必要な点 = 1;
 
             {
                 int 審査員持ち点の残り = 審査員持ち点;
                 合格に必要な点 = 0;
                 while (true)
                 {
+                    int 合格に必要な点に満たない人数 = 0;
                     foreach (int a in s)
                     {
                         if (a < 合格に必要な点)
                         {
-                            審査員持ち点の残り--;
+                            合格に必要な点に満たない人数++;
                         }
                     }
-                    if (審査員持ち点の残り <= 0)
+                    if (T == 13)
                     {
-                        break;
+                        Console.WriteLine("合格に必要な点{0}", 合格に必要な点);
+                        Console.WriteLine("合格に必要な点に満たない人数{0}", 合格に必要な点に満たない人数);
+                        Console.WriteLine("審査員持ち点の残り{0}", 審査員持ち点の残り);
+                        Console.WriteLine();
                     }
-                    合格に必要な点++;
+                    if (合格に必要な点に満たない人数 > 0)
+                    {
+                        合格に必要な点 = 合格に必要な点 + 1.0 / 合格に必要な点に満たない人数;
+                        審査員持ち点の残り--;
+                        if (審査員持ち点の残り <= 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        合格に必要な点++;
+                    }
                 }
-                Console.WriteLine("T{0} 合格に必要な点{1} N{2}",
-                    T,
+                Console.WriteLine("合格に必要な点{0} N{1}",
                     合格に必要な点,
                     N
                 );
             }
 
 
-            int[] 審査員から貰うべき点 = new int[N];
+            double[] 審査員から貰うべき点 = new double[N];
             for (int i = 0; i < N; i++)
             {
                 審査員から貰うべき点[i] = 合格に必要な点 - s[i];
