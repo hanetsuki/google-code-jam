@@ -19,16 +19,65 @@ namespace pb
         static void probCore(long T, Env env)
         {
             Console.WriteLine("start#{0}", T);
-            string line = env.srd.ReadLine();
-            string[] parts = line.Split(Env.delim, StringSplitOptions.None);
-            int N = Int32.Parse(parts[0]);
-            int[] s = new int[N];
+            double D;
+            int N;
+            int A;
+            {
+                string line = env.srd.ReadLine();
+                string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+                D = Double.Parse(parts[0]);
+                N = Int32.Parse(parts[1]);
+                A = Int32.Parse(parts[2]);
+            }
+            double[] t = new double[N];
+            double[] x = new double[N];
             for (int i = 0; i < N; i++)
             {
-                s[i] = Int32.Parse(parts[i+1]);
+                string line = env.srd.ReadLine();
+                string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+                t[i] = Double.Parse(parts[0]);
+                x[i] = Double.Parse(parts[1]);
             }
-            env.swr.Write("Case #{0}:", T);
-            env.swr.WriteLine();
+            double[] a = new double[A];
+            {
+                string line = env.srd.ReadLine();
+                string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+                for (int i = 0; i < A; i++)
+                {
+                    a[i] = Double.Parse(parts[i]);
+                }
+            }
+
+            double tg;
+            if (x[0] >= D)
+            {
+                // 邪魔者はない
+                tg = 0;
+            }
+            else
+            {
+                //small特化判定
+
+                //邪魔ものの速度
+                double js = (x[1] - x[0]) / (t[1] - t[0]);
+
+                //邪魔ものが進むべき距離
+                double jx = (D - x[0]);
+                //邪魔ものがゴールする時間
+                tg = jx / js;
+                Console.WriteLine("jx{0} js{1}", jx, js);
+            }
+            Console.WriteLine("tg{0}", tg);
+
+            env.swr.WriteLine("Case #{0}:", T);
+            for (int i = 0; i < A; i++)
+            {
+                double besttime = Math.Sqrt(2.0 * D / a[i]);
+
+                double time = (tg < besttime) ? besttime : tg;
+                env.swr.WriteLine("{0}", time);
+            }
+
         }
 
         static void probLoop(Env env)

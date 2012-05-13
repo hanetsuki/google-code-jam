@@ -16,19 +16,55 @@ namespace pa
     }
     class Program
     {
+        static bool search(int current, int target, int[][] 継承, bool[] flag)
+        {
+            if (flag[current])
+            {
+                return true;
+            }
+            flag[current] = true;
+            foreach (int m in 継承[current])
+            {
+                if (search(m, target, 継承, flag))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         static void probCore(long T, Env env)
         {
             Console.WriteLine("start#{0}", T);
-            string line = env.srd.ReadLine();
-            string[] parts = line.Split(Env.delim, StringSplitOptions.None);
-            int N = Int32.Parse(parts[0]);
-            int[] s = new int[N];
+            int N;
+            {
+                string line = env.srd.ReadLine();
+                string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+                N = Int32.Parse(parts[0]);
+            }
+            int[][] 継承 = new int[N][];
             for (int i = 0; i < N; i++)
             {
-                s[i] = Int32.Parse(parts[i+1]);
+                string line = env.srd.ReadLine();
+                string[] parts = line.Split(Env.delim, StringSplitOptions.None);
+                int M = Int32.Parse(parts[0]);
+                継承[i] = new int[M];
+                for (int j = 0; j < M; j++)
+                {
+                    継承[i][j] = Int32.Parse(parts[j + 1]) - 1;
+                }
             }
-            env.swr.Write("Case #{0}:", T);
-            env.swr.WriteLine();
+            for (int i = 0; i < N; i++)
+            {
+                bool[] flag = new bool[N];
+
+                //自分の子孫を全探索する
+                if (search(i, i, 継承, flag)) {
+                    env.swr.WriteLine("Case #{0}: Yes", T);
+                    return;
+                }
+            }
+            env.swr.WriteLine("Case #{0}: No", T);
         }
 
         static void probLoop(Env env)
